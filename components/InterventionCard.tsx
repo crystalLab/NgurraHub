@@ -7,14 +7,14 @@ interface InterventionData {
   name: string;
   community: string;
   startDate: string;
-  status: 'active' | 'planning' | 'completed' | 'paused';
+  status: 'active' | 'planning' | 'completed' | 'paused' | string; 
   progress: number;
   participants: number;
   completionRate?: number;
-  outcomes?: { [key: string]: number };
+  outcomes?: { [key: string]: number | undefined };
   connectedServices?: string[];
   nextMilestone?: string;
-  riskLevel?: 'low' | 'moderate' | 'high' | 'critical';
+  riskLevel?: 'low' | 'moderate' | 'high' | 'critical' | string; 
 }
 
 interface InterventionCardProps {
@@ -29,7 +29,10 @@ const InterventionCard: React.FC<InterventionCardProps> = ({
   onConnect 
 }) => {
   const getStatusConfig = () => {
-    switch (intervention.status) {
+    // Normalize status to handle any string input
+    const normalizedStatus = intervention.status.toLowerCase();
+    
+    switch (normalizedStatus) {
       case 'active':
         return {
           backgroundColor: '#D1FAE5',
@@ -64,7 +67,12 @@ const InterventionCard: React.FC<InterventionCardProps> = ({
   };
 
   const getRiskColor = () => {
-    switch (intervention.riskLevel) {
+    if (!intervention.riskLevel) return '#6B7280';
+    
+    // Normalize risk level to handle any string input
+    const normalizedRisk = intervention.riskLevel.toLowerCase();
+    
+    switch (normalizedRisk) {
       case 'critical':
         return '#EF4444';
       case 'high':

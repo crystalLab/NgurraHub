@@ -21,6 +21,7 @@ export default function TabLayout() {
           backgroundColor: '#25292e',
         },
         headerShadowVisible: false,
+        headerShown: false,
         headerTintColor: '#fff',
         tabBarStyle: {
           backgroundColor: '#25292e',
@@ -39,7 +40,7 @@ export default function TabLayout() {
         }}
       />
       <Tabs.Screen
-        name="health-outcomes"
+        name="healthoutcome"
         options={{
           title: 'Health',
           tabBarIcon: ({ color, focused }) => (
@@ -78,7 +79,7 @@ export default function TabLayout() {
         }}
       />
       <Tabs.Screen
-        name="overview"
+        name="about"
         options={{
           title: 'About',
           tabBarIcon: ({ color, focused }) => (
